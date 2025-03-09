@@ -1,0 +1,132 @@
+@font-face {
+  font-family: 'AppleSDGothicNeoT';
+  src: url('./fonts/AppleSDGothicNeoT.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoUL';
+  src: url('./fonts/AppleSDGothicNeoUL.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoL';
+  src: url('./fonts/AppleSDGothicNeoL.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoR';
+  src: url('./fonts/AppleSDGothicNeoR.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoM';
+  src: url('./fonts/AppleSDGothicNeoM.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoSB';
+  src: url('./fonts/AppleSDGothicNeoSB.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoB';
+  src: url('./fonts/AppleSDGothicNeoB.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoEB';
+  src: url('./fonts/AppleSDGothicNeoEB.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoH';
+  src: url('./fonts/AppleSDGothicNeoH.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  }
+
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+.BrandLogo {
+  margin: 9.3vw 40.7vw 4.65vw 40.7vw
+}
+
+.BrandLogo img {
+  width: 18.6vw;
+  height: auto;
+}
+
+.LoginTitle {
+  font-family: 'AppleSDGothicNeoR';
+  font-size: 6.51vw;
+  margin: 0 21.4vw 13.95vw 21.4vw;
+}
+
+.ID {
+  font-family: 'AppleSDGothicNeoL';
+  font-size: 4.65vw;
+  margin: 0 auto 2.33vw 11.63vw;
+}
+
+.IdInput {
+  width: 73.95vw;
+  height: 4.89vw;
+  background-color: black;
+  border: .23vw solid #707070; 
+  border-radius: 1.16vw;
+  margin: 0 11.63vw 3.72vw 11.63vw;
+  font-family: 'AppleSDGothicNeoL';
+  font-size: 4.19vw;
+  padding: 3.37vw 2.33vw 3.37vw;
+}
+
+.error {
+  font-family: 'AppleSDGothicNeoR';
+  font-size: 2.79vw;
+  color: #E10913;
+  margin: 0 11.63vw 2.33vw auto;
+}
+
+.LoginBTN {
+  background-color: #E10913;
+  color: white;
+  margin: 0 11.63vw 3vw 11.63vw;
+  padding: 3.49vw 0 3.49vw 0;
+  border-radius: 6.98vw;
+  font-family: 'AppleSDGothicNeoM';
+  font-size: 4.19vw;
+  text-align: center;
+}
+
+.GuestLoginBTN {
+  background-color: white;
+  color: #E10913;
+  margin: 0 11.63vw 0 11.63vw;
+  padding: 3.49vw 0 3.49vw 0;
+  border-radius: 6.98vw;
+  font-family: 'AppleSDGothicNeoM';
+  font-size: 4.19vw;
+  text-align: center;
+}
