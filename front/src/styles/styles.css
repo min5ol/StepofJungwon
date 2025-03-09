@@ -94,7 +94,8 @@ body {
   width: 73.95vw;
   height: 4.89vw;
   background-color: black;
-  border: .23vw solid #707070; 
+  color: white;
+  border: .23vw solid #707070;
   border-radius: 1.16vw;
   margin: 0 11.63vw 3.72vw 11.63vw;
   font-family: 'AppleSDGothicNeoL';
@@ -102,11 +103,28 @@ body {
   padding: 3.37vw 2.33vw 3.37vw;
 }
 
+.IdInput:focus, .IdInput:active {
+  color: white;
+  background-color: black;
+  outline: none;
+}
+
+
+.IdInput:focus::placeholder {
+  color: transparent;
+}
+
+.IdInput::placeholder {
+  color: #707070;
+  font-family: 'AppleSDGothicNeoL';
+  font-size: 4.19vw;
+}
+
 .error {
   font-family: 'AppleSDGothicNeoR';
   font-size: 2.79vw;
   color: #E10913;
-  margin: 0 11.63vw 2.33vw auto;
+  margin: 0 auto 2.33vw 11.63vw;
 }
 
 .LoginBTN {

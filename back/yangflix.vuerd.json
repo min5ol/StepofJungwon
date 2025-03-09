@@ -4,9 +4,9 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -101,
-    "scrollLeft": -327.4958,
-    "zoomLevel": 0.94,
+    "scrollTop": -299.7414,
+    "scrollLeft": -330.2873,
+    "zoomLevel": 1,
     "show": 431,
     "database": 4,
     "databaseName": "",
@@ -33,7 +33,6 @@
     "tableIds": [
       "oIM5biWzC4ShGKUgq-8kq",
       "2vhlMRtzn_t_HSg03AiYw",
-      "foQ8yd-Vx_TFKGWUqAEEn",
       "0fVUzU2tNH2tuP6Skhwd5",
       "eVBCTaityEVv3wS2pb-tg",
       "4NKZPNF7RgQNQCOCiyw-A",
@@ -44,8 +43,7 @@
       "Qer2T4G37F5LOG95AhLq7",
       "SKdTsAvT19UOyGtNUyCwP",
       "-uwJuEBUEMk92TgLDavrd",
-      "FWW7pc4uKQ-338UHZ_c3c",
-      "8fTV_NLzB6Ob4mNKC83hw"
+      "FWW7pc4uKQ-338UHZ_c3c"
     ],
     "indexIds": [],
     "memoIds": []
@@ -158,7 +156,7 @@
           "color": "#9C27B0"
         },
         "meta": {
-          "updateAt": 1741402319894,
+          "updateAt": 1741498427324,
           "createAt": 1741399602162
         }
       },
@@ -552,7 +550,7 @@
         "comment": "세션 토큰",
         "dataType": "VARCHAR(255)",
         "default": "",
-        "options": 0,
+        "options": 8,
         "ui": {
           "keys": 0,
           "widthName": 75,
@@ -561,7 +559,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1741399563632,
+          "updateAt": 1741498568535,
           "createAt": 1741399547468
         }
       },
@@ -1494,7 +1492,7 @@
         "default": "",
         "options": 8,
         "ui": {
-          "keys": 2,
+          "keys": 0,
           "widthName": 60,
           "widthComment": 60,
           "widthDataType": 60,
@@ -1913,7 +1911,8 @@
       {
         "name": 1741399553106,
         "dataType": 1741399559583,
-        "comment": 1741399563632
+        "comment": 1741399563632,
+        "options(notNull)": 1741498568534
       }
     ],
     "pQ5MLLonsqCyR4fPtlJjl": [
@@ -1930,7 +1929,7 @@
     "foQ8yd-Vx_TFKGWUqAEEn": [
       "tableEntities",
       1741399602161,
-      -1,
+      1741498434331,
       {
         "name": 1741399627129,
         "comment": 1741399631541,
@@ -2557,7 +2556,7 @@
     "8fTV_NLzB6Ob4mNKC83hw": [
       "relationshipEntities",
       1741402247367,
-      -1,
+      1741498434331,
       {}
     ]
   }
