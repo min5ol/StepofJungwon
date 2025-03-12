@@ -1,12 +1,8 @@
 package com.min5ol.back.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.min5ol.back.DTO.UserDTO;
+import com.min5ol.back.DTO.UserResponse;
 import com.min5ol.back.Service.UserService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,8 +15,7 @@ public class UserController {
   }
 
   @GetMapping("/{id}")
-  public UserDTO getUserById(@PathVariable Long id) {
+  public UserResponse getUserById(@PathVariable Long id) {
     return userService.getUserById(id);
   }
-
 }

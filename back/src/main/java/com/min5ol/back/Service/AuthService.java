@@ -14,7 +14,7 @@ public class AuthService {
     }
 
     public String login(UserDetails userDetails) {
-        // userDetails에서 사용자 이름을 추출하여 토큰을 생성
-        return jwtTokenProvider.createToken(userDetails.getUsername()); // 수정된 부분
+        // userDetails에서 사용자 이름을 추출하여 토큰 생성
+        return jwtTokenProvider.createToken(userDetails.getUsername());
     }
 }

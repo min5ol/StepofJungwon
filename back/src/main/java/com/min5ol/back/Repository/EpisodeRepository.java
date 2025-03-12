@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface EpisodeRepository extends JpaRepository<Episode, Long> {
-    List<Episode> findByContentId(Long contentId); // 특정 컨텐츠의 모든 에피소드 조회
+    // 엔티티의 'content' 객체의 id로 조회하도록 수정
+    List<Episode> findByContent_Id(Long contentId);
 }

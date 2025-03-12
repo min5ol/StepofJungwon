@@ -14,4 +14,6 @@ public class UserResponse {
     private String username;
     private String nickname;
     private String email;
+    // 프로필 이미지 URL 추가
+    private String profileImg;
 }

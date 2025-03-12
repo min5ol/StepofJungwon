@@ -1,8 +1,8 @@
 package com.min5ol.back.DTO;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

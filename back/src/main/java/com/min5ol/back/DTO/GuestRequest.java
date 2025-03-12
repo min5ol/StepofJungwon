@@ -8,5 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class GuestRequest {
-    private String sessionId;
+    // 게스트는 단순히 sessionToken(혹은 sessionId)만 전달하면 됨
+    private String sessionToken;
 }

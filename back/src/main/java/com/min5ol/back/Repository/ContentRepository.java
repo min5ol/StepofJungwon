@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ContentRepository extends JpaRepository<Content, Long> {
     List<Content> findByTitleContaining(String keyword);
-    List<Content> findByGenre(String genre); // ✅ category → genre 수정
+    List<Content> findByGenre(String genre);
     List<Content> findByReleaseDate(LocalDate releaseDate);
 }

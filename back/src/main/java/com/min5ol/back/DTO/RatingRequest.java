@@ -10,6 +10,6 @@ import lombok.Setter;
 public class RatingRequest {
     private Long userId;
     private Long contentId;
-    private String rating; // ENUM('LOW', 'MEDIUM', 'HIGH')
-    private String review;
+    // rating 값을 문자열로 받아서 나중에 엔티티에서 Enum으로 변환
+    private String rating;
 }

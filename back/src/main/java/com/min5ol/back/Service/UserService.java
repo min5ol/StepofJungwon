@@ -1,13 +1,12 @@
 package com.min5ol.back.Service;
 
-import com.min5ol.back.DTO.UserDTO;
+import com.min5ol.back.DTO.UserResponse;
 import com.min5ol.back.Entity.User;
 import com.min5ol.back.Repository.UserRepository;
 import com.min5ol.back.DTO.SignUpRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -15,39 +14,32 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // Correct constructor injection
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDTO getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.map(u -> new UserDTO(u.getId(), u.getUsername(), u.getNickname(), u.getEmail()))
-                .orElse(null);
+    // ID로 사용자 정보 조회
+    public UserResponse getUserById(Long id) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        return new UserResponse(user.getId(), user.getUsername(), user.getNickname(), user.getEmail(), user.getProfileImg());
     }
 
-    // 회원가입 메소드
+    // 회원가입 기능
     public String signUp(SignUpRequest signUpRequest) {
-        // 이메일 중복 체크
-        Optional<User> existingUser = userRepository.findByEmail(signUpRequest.getEmail());
-        if (existingUser.isPresent()) {
+        if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
             return "Email is already registered.";
         }
-
-        // 비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(signUpRequest.getPassword());
-
-        // 새로운 User 객체 생성
         User user = User.builder()
                 .username(signUpRequest.getUsername())
                 .password(encodedPassword)
                 .nickname(signUpRequest.getNickname())
                 .email(signUpRequest.getEmail())
-                .role(User.Role.USER) // 기본 역할은 USER
+                .role(User.Role.USER)
+                .profileImg("https://storage.googleapis.com/your-bucket-name/profile1.png")
                 .build();
-
-        // User 저장
         userRepository.save(user);
         return "User registered successfully";
     }

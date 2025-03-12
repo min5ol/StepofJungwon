@@ -1,25 +1,29 @@
 package com.min5ol.back.Entity;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.springframework.data.annotation.Id;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    private String sessionId; 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    
+    // 게스트는 독립적으로 관리되며, User와 관계 맺지 않음.
+    @Column(name = "session_token", nullable = false, unique = true)
+    private String sessionToken;
+    
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

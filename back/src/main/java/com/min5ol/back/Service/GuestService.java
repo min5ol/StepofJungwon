@@ -17,16 +17,18 @@ public class GuestService {
         this.guestRepository = guestRepository;
     }
 
-    // 📌 1. 새로운 게스트 세션 생성
+    // 새로운 게스트 세션 생성
     public GuestResponse createGuestSession() {
-        String sessionId = UUID.randomUUID().toString(); // 랜덤 UUID 생성
-        Guest guest = new Guest(sessionId);
+        String sessionToken = UUID.randomUUID().toString();
+        Guest guest = Guest.builder()
+                .sessionToken(sessionToken)
+                .build();
         return new GuestResponse(guestRepository.save(guest));
     }
 
-    // 📌 2. 기존 세션 확인
-    public GuestResponse getGuestBySessionId(String sessionId) {
-        Optional<Guest> guest = guestRepository.findBySessionId(sessionId);
+    // 기존 세션 확인 (sessionToken 기준)
+    public GuestResponse getGuestBySessionToken(String sessionToken) {
+        Optional<Guest> guest = guestRepository.findBySessionToken(sessionToken);
         return guest.map(GuestResponse::new)
                 .orElseThrow(() -> new RuntimeException("세션이 유효하지 않습니다."));
     }

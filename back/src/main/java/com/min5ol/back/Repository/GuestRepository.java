@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface GuestRepository extends JpaRepository<Guest, Long> {
-    Optional<Guest> findBySessionId(String sessionId);
+    // 엔티티의 필드명이 sessionToken임에 주의
+    Optional<Guest> findBySessionToken(String sessionToken);
 }

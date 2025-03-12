@@ -1,38 +1,43 @@
 package com.min5ol.back.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    // 평가한 사용자를 참조
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
+    
+    // 평가 대상 컨텐츠를 참조
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "content_id", nullable = false)
     private Content content;
-
+    
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RatingType rating;
-
-    private String review;
-
+    
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+    
     public enum RatingType {
         LOW, MEDIUM, HIGH
+    }
+    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
     }
 }

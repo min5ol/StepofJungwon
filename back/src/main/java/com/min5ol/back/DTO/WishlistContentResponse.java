@@ -17,6 +17,6 @@ public class WishlistContentResponse {
         this.userId = wishlistContent.getUser().getId();
         this.contentId = wishlistContent.getContent().getId();
         this.contentTitle = content.getTitle();
-        this.thumbnailUrl = content.getThumbnailUrl();
+        this.thumbnailUrl = content.getThumbnail();
     }
 }

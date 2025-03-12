@@ -1,18 +1,9 @@
 package com.min5ol.back.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.springframework.data.annotation.Id;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
 @Getter
@@ -24,13 +15,37 @@ public class Episode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String title;  
-    private int episodeNumber;  
-    private String duration;  
-    private String thumbnailUrl;  
-
-    @ManyToOne
+    
+    // Episode는 반드시 Content와 연관됨
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "content_id", nullable = false)
-    private Content content;  
+    private Content content;
+    
+    private String title;
+    
+    @Column(name = "episode_number", nullable = false)
+    private int episodeNumber;
+    
+    @Column(name = "release_date", nullable = false)
+    private LocalDate releaseDate;
+    
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+    
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
+    
+    @Column(name = "thumbnail", nullable = false)
+    private String thumbnail;
+    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = createdAt;
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }

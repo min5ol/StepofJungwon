@@ -2,26 +2,29 @@ package com.min5ol.back.DTO;
 
 import com.min5ol.back.Entity.Episode;
 import lombok.Getter;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 public class EpisodeResponse {
     private Long id;
     private Long contentId;
     private String title;
-    private String description;
+    private int episodeNumber;
     private LocalDate releaseDate;
-    private String duration;
-    private String thumbnailUrl; // ✅ Thumbnail 추가
+    private String thumbnailUrl;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public EpisodeResponse(Episode episode) {
         this.id = episode.getId();
         this.contentId = episode.getContent().getId();
         this.title = episode.getTitle();
-        this.description = episode.getDescription();
+        this.episodeNumber = episode.getEpisodeNumber();
         this.releaseDate = episode.getReleaseDate();
-        this.duration = episode.getDuration();
-        this.thumbnailUrl = episode.getThumbnailUrl();  // ✅ 추가
+        this.thumbnailUrl = episode.getThumbnail();
+        // createdAt, updatedAt 포함 시:
+        // this.createdAt = episode.getCreatedAt();
+        // this.updatedAt = episode.getUpdatedAt();
     }
 }

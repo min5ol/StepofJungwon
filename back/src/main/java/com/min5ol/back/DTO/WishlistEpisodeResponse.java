@@ -17,6 +17,6 @@ public class WishlistEpisodeResponse {
         this.userId = wishlistEpisode.getUser().getId();
         this.episodeId = wishlistEpisode.getEpisode().getId();
         this.episodeTitle = episode.getTitle();
-        this.thumbnailUrl = episode.getThumbnailUrl();
+        this.thumbnailUrl = episode.getThumbnail();
     }
 }

@@ -9,13 +9,11 @@ public class RatingResponse {
     private Long userId;
     private Long contentId;
     private String rating;
-    private String review;
 
     public RatingResponse(Rating rating) {
         this.id = rating.getId();
         this.userId = rating.getUser().getId();
         this.contentId = rating.getContent().getId();
-        this.rating = rating.getRating().name(); // ENUM 값 변환
-        this.review = rating.getReview();
+        this.rating = rating.getRating().name();
     }
 }

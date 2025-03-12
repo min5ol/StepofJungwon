@@ -17,21 +17,21 @@ public class WishlistEpisodeController {
         this.wishlistEpisodeService = wishlistEpisodeService;
     }
 
-    // 📌 찜한 에피소드 추가
+    // 찜한 에피소드 추가
     @PostMapping("/{userId}/{episodeId}")
     public ResponseEntity<String> addWishlistEpisode(@PathVariable Long userId, @PathVariable Long episodeId) {
         wishlistEpisodeService.addWishlistEpisode(userId, episodeId);
         return ResponseEntity.ok("Episode added to wishlist");
     }
 
-    // 📌 찜한 에피소드 삭제
+    // 찜한 에피소드 삭제
     @DeleteMapping("/{userId}/{episodeId}")
     public ResponseEntity<String> removeWishlistEpisode(@PathVariable Long userId, @PathVariable Long episodeId) {
         wishlistEpisodeService.removeWishlistEpisode(userId, episodeId);
         return ResponseEntity.ok("Episode removed from wishlist");
     }
 
-    // 📌 사용자의 찜한 에피소드 목록 조회 (제목 & 썸네일 포함)
+    // 사용자의 찜한 에피소드 목록 조회 (제목 및 썸네일 포함)
     @GetMapping("/{userId}")
     public ResponseEntity<List<WishlistEpisodeResponse>> getWishlistEpisodes(@PathVariable Long userId) {
         return ResponseEntity.ok(wishlistEpisodeService.getWishlistEpisodesByUserId(userId));

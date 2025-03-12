@@ -15,15 +15,15 @@ public class GuestController {
         this.guestService = guestService;
     }
 
-    // 📌 1. 새로운 게스트 세션 생성
+    // 새로운 게스트 세션 생성
     @PostMapping("/create")
     public ResponseEntity<GuestResponse> createGuestSession() {
         return ResponseEntity.ok(guestService.createGuestSession());
     }
 
-    // 📌 2. 기존 세션 확인
-    @GetMapping("/{sessionId}")
-    public ResponseEntity<GuestResponse> getGuestBySessionId(@PathVariable String sessionId) {
-        return ResponseEntity.ok(guestService.getGuestBySessionId(sessionId));
+    // 기존 세션 확인 (sessionToken 기준)
+    @GetMapping("/{sessionToken}")
+    public ResponseEntity<GuestResponse> getGuestBySessionToken(@PathVariable String sessionToken) {
+        return ResponseEntity.ok(guestService.getGuestBySessionToken(sessionToken));
     }
 }
