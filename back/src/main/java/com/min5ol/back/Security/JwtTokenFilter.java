@@ -1,11 +1,12 @@
-package com.min5ol.back.Service;
+package com.min5ol.back.Security;
 
-import com.min5ol.back.Security.JwtTokenProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.min5ol.back.Service.CustomUserDetailsService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

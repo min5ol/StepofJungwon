@@ -8,10 +8,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +26,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class User {
-  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -49,26 +47,14 @@ public class User {
   private Role role;
 
   @Column(nullable = false)
-  private LocalDateTime createdAt;
+  private LocalDateTime createdAt = LocalDateTime.now();
 
   @Column(nullable = false)
-  private LocalDateTime updatedAt;
+  private LocalDateTime updatedAt = LocalDateTime.now();
 
   private LocalDateTime lastLogin;
-
-  @PrePersist
-  public void prePersist() {
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = LocalDateTime.now();
-  }
-
-  @PreUpdate
-  public void preUpdate() {
-    this.updatedAt = LocalDateTime.now();
-  }
 
   public enum Role {
     USER, ADMIN
   }
-
 }
