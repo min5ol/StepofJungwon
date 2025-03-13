@@ -4,9 +4,9 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -100,
-    "scrollLeft": -525,
-    "zoomLevel": 1,
+    "scrollTop": -547.8924,
+    "scrollLeft": -710.3787,
+    "zoomLevel": 0.85,
     "show": 431,
     "database": 4,
     "databaseName": "",
@@ -1371,17 +1371,17 @@
         "name": "profile_img",
         "comment": "사용자 프로필 이미지 URL",
         "dataType": "VARCHAR(255)",
-        "default": "https://storage.googleapis.com/your-bucket-name/profile1.png",
+        "default": "https://storage.cloud.google.com/yangflix-storage/profile_img/profile_image1.jpg",
         "options": 8,
         "ui": {
           "keys": 0,
           "widthName": 61,
           "widthComment": 141,
           "widthDataType": 81,
-          "widthDefault": 340
+          "widthDefault": 435
         },
         "meta": {
-          "updateAt": 1741789339051,
+          "updateAt": 1741827034527,
           "createAt": 1741789271419
         }
       }
@@ -1425,18 +1425,18 @@
           "columnIds": [
             "CsO_YwBewQ5dMj4xFTPff"
           ],
-          "x": 1179.9605000000001,
-          "y": 789.8605,
-          "direction": 4
+          "x": 950.2105,
+          "y": 1011.8605,
+          "direction": 1
         },
         "end": {
           "tableId": "RksLS9v7mEgFOMHHW7RAg",
           "columnIds": [
             "Q5MmAadbJI4_0lQrxnKTJ"
           ],
-          "x": 1246,
-          "y": 501,
-          "direction": 2
+          "x": 989.5,
+          "y": 589,
+          "direction": 8
         },
         "meta": {
           "updateAt": 1741788114282,
@@ -1481,7 +1481,7 @@
           "columnIds": [
             "CsO_YwBewQ5dMj4xFTPff"
           ],
-          "x": 1639.4605000000001,
+          "x": 1457.2105000000001,
           "y": 789.8605,
           "direction": 4
         },
@@ -1566,7 +1566,7 @@
             "CsO_YwBewQ5dMj4xFTPff"
           ],
           "x": 950.2105,
-          "y": 937.8605,
+          "y": 863.8605,
           "direction": 1
         },
         "end": {
@@ -2373,7 +2373,7 @@
         "name": 1741789281494,
         "dataType": 1741789299574,
         "options(notNull)": 1741789302422,
-        "default": 1741789328625,
+        "default": 1741827034525,
         "comment": 1741789339051
       }
     ]
