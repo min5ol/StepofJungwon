@@ -1,5 +1,151 @@
-body {
-  background-color: black;
-  color: white;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Pretendard-H';
+  src: url('./fonts/Pretendard-Black.otf');
 }
 
+@font-face {
+  font-family: 'Pretendard-B';
+  src: url('./fonts/Pretendard-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-EB';
+  src: url('./fonts/Pretendard-ExtraBold.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-EL';
+  src: url('./fonts/Pretendard-ExtraLight.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-L';
+  src: url('./fonts/Pretendard-Light.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-M';
+  src: url('./fonts/Pretendard-Medium.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-R';
+  src: url('./fonts/Pretendard-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-SB';
+  src: url('./fonts/Pretendard-SemiBold.otf');
+}
+
+@font-face {
+  font-family: 'Pretendard-T';
+  src: url('./fonts/Pretendard-Thin.otf');
+}
+
+@font-face {
+  font-family: 'Jeju-M';
+  src: url('./fonts/JejuMyeongjo.ttf');
+}
+
+@font-face {
+  font-family: 'Weekend';
+  src: url('./fonts/Sunday\ Midnight\ Personal\ Use.otf');
+} 
+
+@font-face {
+  font-family: 'AppleSDGothicNeoT';
+  src: url('./fonts/AppleSDGothicNeoT.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoUL';
+  src: url('./fonts/AppleSDGothicNeoUL.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoL';
+  src: url('./fonts/AppleSDGothicNeoL.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoR';
+  src: url('./fonts/AppleSDGothicNeoR.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoM';
+  src: url('./fonts/AppleSDGothicNeoM.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoSB';
+  src: url('./fonts/AppleSDGothicNeoSB.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoB';
+  src: url('./fonts/AppleSDGothicNeoB.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoEB';
+  src: url('./fonts/AppleSDGothicNeoEB.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  }
+
+@font-face {
+  font-family: 'AppleSDGothicNeoH';
+  src: url('./fonts/AppleSDGothicNeoH.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Display-H';
+    src: url('./fonts/PlayfairDisplay-Black.ttf');
+  }
+
+  @font-face {
+    font-family: 'Display-B';
+    src: url('./fonts/PlayfairDisplay-Bold.ttf');
+  }
+
+  @font-face {
+    font-family: 'Display-EB';
+    src: url('./fonts/PlayfairDisplay-ExtraBold.ttf');
+  }
+
+  @font-face {
+    font-family: 'Display-M';
+    src: url('./fonts/PlayfairDisplay-Medium.ttf');
+  }
+
+  @font-face {
+    font-family: 'Display-R';
+    src: url('./fonts/PlayfairDisplay-Regular.ttf');
+  }
+
+  @font-face {
+    font-family: 'Display-SB';
+    src: url('./fonts/PlayfairDisplay-SemiBold.ttf');
+  }
