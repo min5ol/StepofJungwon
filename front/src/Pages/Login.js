@@ -1,7 +1,9 @@
 import React from 'react';
 import '../App.css';
 import brandLogo from '../assets/Brandlogo.png';
-import InputField from '../Components/InputField';
+import InputField from '../components/InputField';
+import InputTagBtn from '../components/InputTagBtn';
+import TagAbtn from '../components/TagAbtn';
 
 function Login() {
   return (
@@ -17,6 +19,14 @@ function Login() {
       <section className="pt-[13.95vw]">
         <InputField name="아이디" type="text" placeholder="아이디" />
         <InputField name="비밀번호" type="password" placeholder="비밀번호" />
+      </section>
+
+      <section className="pt-[4.65vw]">
+        <InputTagBtn value="로그인하기" bg="brandcolor" color="white" />
+      </section>
+
+      <section className="pt-[2.33vw]">
+        <TagAbtn href="#" name="비회원으로 시작하기" bg="white" color="brandcolor" />
       </section>
 
     </section>

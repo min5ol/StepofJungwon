@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        brandcolor: '#E10913',
+      },
       screens: {
         'mobile': {'max': '767px'},
         'desktop': {'min': '768px'},
