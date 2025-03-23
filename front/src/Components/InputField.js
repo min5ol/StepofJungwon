@@ -1,10 +1,18 @@
 import React from 'react';
 
-function InputField(props){
+function InputField({ name, type, placeholder, value, onChange }) {
   return (
-    <div className="pb-[3.72vw]"> 
-      <p className="text-white text-[4.65vw] font-AppleSDGothicNeoR pb-[2.33vw]">{props.name}</p>
-      <input type={props.type} placeholder={props.placeholder} className="border border-[#707070] bg-transparent rounded-[1.16vw] w-[76.74vw] h-[11.63vw] pl-[2.33vw] placeholder:font-AppleSDGothicNeoL text-[4.19vw] text-[#707070]"></input>
+    <div className="mb-[4.65vw]">
+      <label className="text-white text-[4.19vw] font-AppleSDGothicNeoR block mb-[1.86vw]">
+        {name}
+      </label>
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="w-full h-[11.63vw] px-[4vw] rounded-[1.16vw] bg-black border border-[#808080] text-[#808080] font-AppleSDGothicNeoM text-[3.5vw]"
+      />
     </div>
   );
 }
