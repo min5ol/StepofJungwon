@@ -1,3 +1,56 @@
+@font-face {
+  font-family: 'AppleSDGothicNeoH';
+  src: url('/fonts/AppleSDGothicNeoH.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoEB';
+  src: url('/fonts/AppleSDGothicNeoEB.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoSB';
+  src: url('/fonts/AppleSDGothicNeoSB.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoB';
+  src: url('/fonts/AppleSDGothicNeoB.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoM';
+  src: url('/fonts/AppleSDGothicNeoM.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoR';
+  src: url('/fonts/AppleSDGothicNeoR.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoL';
+  src: url('/fonts/AppleSDGothicNeoL.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoUL';
+  src: url('/fonts/AppleSDGothicNeoUL.ttf');
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeoT';
+  src: url('/fonts/AppleSDGothicNeoT.ttf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
