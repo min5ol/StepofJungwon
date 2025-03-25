@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
 import Rounded from "../components/RoundedButton";
 import brandLogo from '../assets/YANGFLIX.png';
@@ -6,6 +7,7 @@ import brandLogo from '../assets/YANGFLIX.png';
 export default function SignupStep1() {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -18,12 +20,11 @@ export default function SignupStep1() {
     } else if (!usernameRegex.test(username)) {
       setError("아이디는 영소문자 및 숫자를 포함하여야 합니다.");
     } else if (username === "kkulbbang") {
-      // ✅ 실제론 백엔드 중복확인 필요
       setError("현재 아이디는 사용 중 입니다.");
     } else {
       try {
         console.log("다음 단계로:", username);
-        // ✅ 다음 스텝으로 이동
+        navigate("/signup/step2");
       } catch (err) {
         setError("일시적인 오류로 로그인 할 수 없습니다. 잠시 후 다시 이용해주세요.");
       }
@@ -46,7 +47,7 @@ export default function SignupStep1() {
           />
         </div>
 
-        {/* ✅ 에러 메시지 영역 */}
+        {/* 에러 메시지 */}
         {error && (
           <p className="text-[#E50914] text-[2.79vw] font-AppleSDGothicNeoR pt-[2.33vw] w-full text-left px-[11.63vw]">
             {error}
@@ -60,8 +61,15 @@ export default function SignupStep1() {
         </div>
       </form>
 
-      <p className="pt-[32.56vw] text-[#808080] font-AppleSDGothicNeoL text-[3.72vw]">이미 계정이 있나요?</p>
-      <a href="/login" className="pt-[4.65vw] underline font-AppleSDGothicNeoL text-[3.72vw] text-white">여기에서 로그인하세요.</a>
+      <p className="pt-[32.56vw] text-[#808080] font-AppleSDGothicNeoL text-[3.72vw]">
+        이미 계정이 있나요?
+      </p>
+      <a
+        href="/login"
+        className="pt-[4.65vw] underline font-AppleSDGothicNeoL text-[3.72vw] text-white"
+      >
+        여기에서 로그인하세요.
+      </a>
 
       <p className="pt-[66.74vw] pb-[9.3vw] text-white text-[1.86vw] font-AppleSDGothicNeoL">
         이 사이트는 Google 개인정보 처리방침과 서비스 약관이 적용됩니다.
