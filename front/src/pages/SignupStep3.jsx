@@ -4,16 +4,14 @@ import Rounded from "../components/RoundedButton";
 import brandLogo from "../assets/YANGFLIX.png";
 import step2 from "../assets/step2.png";
 import arrowRight from "../assets/arrow-right.png";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupStep3() {
   const [nickname, setNickname] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleNext = async (e) => {
+  const handleNext = (e) => {
     e.preventDefault();
     setError("");
 
@@ -22,32 +20,16 @@ export default function SignupStep3() {
       return;
     }
 
-    try {
-      setLoading(true);
-
-      const response = await axios.get("http://localhost:8080/api/users/check-nickname", {
-        params: { nickname },
-        withCredentials: true, // ✅ 꼭 추가!
-      });
-
-      if (response.data === true) {
-        setError("이미 사용 중인 닉네임입니다.");
-      } else {
-        console.log("닉네임 사용 가능:", nickname);
-        navigate("/signup/step4");
-      }
-    } catch (err) {
-      console.error("닉네임 중복 검사 오류:", err);
-      setError("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-    } finally {
-      setLoading(false);
-    }
+    // ✅ 닉네임 검증은 서버에 회원가입 요청 시 처리하도록
+    console.log("닉네임 저장:", nickname);
+    navigate("/signup/step4"); // 다음 단계로 이동
   };
 
   return (
     <div className="min-h-[100dvh] bg-black flex flex-col items-center">
       <img src={brandLogo} className="pt-[23.26vw]" />
       <img src={step2} className="pt-[5.4vw]" />
+
       <div className="flex items-center pt-[4.65vw] w-full text-left px-[8.14vw]">
         <img src={arrowRight} className="w-[2.67vw] h-[4.18vw] mr-[4.65vw]" />
         <div>
@@ -74,8 +56,8 @@ export default function SignupStep3() {
         )}
 
         <div className="pt-[6.98vw] w-full flex justify-center">
-          <Rounded as="input" type="submit" variant="primary" disabled={loading}>
-            {loading ? "확인 중..." : "다음"}
+          <Rounded as="input" type="submit" variant="primary">
+            다음
           </Rounded>
         </div>
       </form>

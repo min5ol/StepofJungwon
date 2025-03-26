@@ -19,9 +19,4 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    // ✅ 닉네임 중복 검사 API
-    @GetMapping("/check-nickname")
-    public boolean checkNickname(@RequestParam String nickname) {
-        return userService.isNicknameDuplicate(nickname);
-    }
 }
