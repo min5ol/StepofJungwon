@@ -1,16 +1,19 @@
-// src/pages/SignupStep3.jsx
 import { useState } from "react";
 import InputField from "../components/InputField";
 import Rounded from "../components/RoundedButton";
-import brandLogo from '../assets/YANGFLIX.png';
+import brandLogo from "../assets/YANGFLIX.png";
 import step2 from "../assets/step2.png";
 import arrowRight from "../assets/arrow-right.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupStep3() {
   const [nickname, setNickname] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -19,21 +22,32 @@ export default function SignupStep3() {
       return;
     }
 
-    // ❗ 실제로는 여기서 백엔드 중복 확인 API 호출
-    if (nickname === "정원이") {
-      setError("이미 사용 중인 닉네임입니다.");
-      return;
-    }
+    try {
+      setLoading(true);
 
-    console.log("닉네임 통과:", nickname);
-    // 다음 단계로 이동 로직 작성
+      const response = await axios.get("http://localhost:8080/api/users/check-nickname", {
+        params: { nickname },
+        withCredentials: true, // ✅ 꼭 추가!
+      });
+
+      if (response.data === true) {
+        setError("이미 사용 중인 닉네임입니다.");
+      } else {
+        console.log("닉네임 사용 가능:", nickname);
+        navigate("/signup/step4");
+      }
+    } catch (err) {
+      console.error("닉네임 중복 검사 오류:", err);
+      setError("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-[100dvh] bg-black flex flex-col items-center">
       <img src={brandLogo} className="pt-[23.26vw]" />
       <img src={step2} className="pt-[5.4vw]" />
-
       <div className="flex items-center pt-[4.65vw] w-full text-left px-[8.14vw]">
         <img src={arrowRight} className="w-[2.67vw] h-[4.18vw] mr-[4.65vw]" />
         <div>
@@ -60,8 +74,8 @@ export default function SignupStep3() {
         )}
 
         <div className="pt-[6.98vw] w-full flex justify-center">
-          <Rounded as="input" type="submit" variant="primary">
-            다음
+          <Rounded as="input" type="submit" variant="primary" disabled={loading}>
+            {loading ? "확인 중..." : "다음"}
           </Rounded>
         </div>
       </form>

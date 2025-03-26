@@ -20,8 +20,8 @@ public class WishlistEpisodeService {
     private final UserRepository userRepository;
 
     public WishlistEpisodeService(WishlistEpisodeRepository wishlistEpisodeRepository,
-                                  EpisodeRepository episodeRepository,
-                                  UserRepository userRepository) {
+                                EpisodeRepository episodeRepository,
+                                UserRepository userRepository) {
         this.wishlistEpisodeRepository = wishlistEpisodeRepository;
         this.episodeRepository = episodeRepository;
         this.userRepository = userRepository;

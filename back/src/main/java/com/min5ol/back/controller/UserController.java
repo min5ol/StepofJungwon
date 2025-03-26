@@ -4,11 +4,10 @@ import com.min5ol.back.DTO.UserResponse;
 import com.min5ol.back.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-  
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -18,5 +17,11 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponse getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
+    }
+
+    // ✅ 닉네임 중복 검사 API
+    @GetMapping("/check-nickname")
+    public boolean checkNickname(@RequestParam String nickname) {
+        return userService.isNicknameDuplicate(nickname);
     }
 }
