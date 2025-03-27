@@ -35,8 +35,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder builder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
+        AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
         builder.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
         return builder.build();
@@ -58,24 +57,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .antMatchers(
-                    "/auth/**",
-                    "/login",
-                    "/signup",
-                    "/signup/step1",
-                    "/api/signup/step1",
-                    "/signup/step2",
-                    "/api/signup/step2",
-                    "/signup/step3",
-                    "/api/signup/step3",
-                    "/signup/step4",
-                    "/api/signup/step4"
-                ).permitAll()
-                .anyRequest().authenticated())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .antMatchers(
+                                "/auth/**",
+                                "/login",
+                                "/api/login",
+                                "/signup",
+                                "/signup/step1",
+                                "/api/signup/step1",
+                                "/signup/step2",
+                                "/api/signup/step2",
+                                "/signup/step3",
+                                "/api/signup/step3",
+                                "/signup/step4",
+                                "/api/signup/step4",
+                                "/admin",
+                                "/api/admin",
+                                "/admin/content",
+                                "/api/admin/content",
+                                "/admin/episode",
+                                "/api/admin/episode",
+                                "/content",
+                                "/api/content",
+                                "/episodes",
+                                "/api/episodes"
+                                )
+                        .permitAll()
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

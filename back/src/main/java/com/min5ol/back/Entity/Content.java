@@ -1,7 +1,6 @@
 package com.min5ol.back.Entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.*;
 
@@ -22,9 +21,6 @@ public class Content {
     private String description;
     
     private String genre;
-    
-    @Column(name = "release_date", nullable = false)
-    private LocalDate releaseDate;
     
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -35,7 +34,7 @@ export default function Login() {
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      const token = response.data.token;
+      const { token, role } = response.data;
 
       // ✅ 자동 로그인 여부에 따라 저장소 선택
       if (autoLogin) {
@@ -44,8 +43,13 @@ export default function Login() {
         sessionStorage.setItem('token', token);
       }
 
-      console.log('로그인 성공:', token);
-      navigate("/year");
+      // ✅ 역할에 따라 분기
+      if (role === 'ADMIN') {
+        navigate('/admin');
+      } else {
+        navigate('/year');
+      }
+
     } catch (err) {
       if (err.response?.status === 401) {
         setError('아이디 또는 비밀번호를 잘못 입력하셨습니다.');
@@ -80,7 +84,7 @@ export default function Login() {
           />
         </div>
 
-        {/* ✅ 자동 로그인 체크박스 */}
+        {/* 자동 로그인 체크박스 */}
         <div className="w-full px-[11.63vw] pt-[3vw] text-white text-[2.79vw] font-AppleSDGothicNeoL">
           <label className="flex items-center space-x-2">
             <input

@@ -25,7 +25,6 @@ public class ContentService {
                 .title(contentDto.getTitle())
                 .description(contentDto.getDescription())
                 .genre(contentDto.getGenre())
-                .releaseDate(contentDto.getReleaseDate())
                 .thumbnail(contentDto.getThumbnailUrl())
                 .build();
         Content savedContent = contentRepository.save(content);
@@ -40,7 +39,6 @@ public class ContentService {
             content.setTitle(updatedDto.getTitle());
             content.setDescription(updatedDto.getDescription());
             content.setGenre(updatedDto.getGenre());
-            content.setReleaseDate(updatedDto.getReleaseDate());
             content.setThumbnail(updatedDto.getThumbnailUrl());
             return new ContentResponse(contentRepository.save(content));
         } else {

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtTokenProvider {
 
-    private String secretKey = "yourSecretKey"; // 실제 운영 시 안전하게 관리
+    private String secretKey = "yourVerySecretKeyThatIsLongEnough123!"; // 실제 운영 시 안전하게 관리
     private long validityInMilliseconds = 3600000; // 1시간
 
     private SecretKey getKey() {

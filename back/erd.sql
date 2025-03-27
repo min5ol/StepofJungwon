@@ -4,7 +4,6 @@ CREATE TABLE Content (
   title        VARCHAR(255) NOT NULL COMMENT '컨텐츠 제목',
   description  TEXT         NOT NULL COMMENT '컨텐츠 설명',
   genre        VARCHAR(255) NOT NULL COMMENT '컨텐츠 장르',
-  release_date DATE         NOT NULL COMMENT '출시일자',
   created_at   DATETIME     NOT NULL COMMENT '컨텐츠 생성 날짜',
   updated_at   DATETIME     NOT NULL COMMENT '컨텐츠 수정 날짜',
   thumbnail    VARCHAR(255) NOT NULL COMMENT '컨텐츠 썸네일 URL',
