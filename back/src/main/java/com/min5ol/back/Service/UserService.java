@@ -1,9 +1,11 @@
 package com.min5ol.back.Service;
 
+import com.min5ol.back.DTO.SignUpRequest;
 import com.min5ol.back.DTO.UserResponse;
 import com.min5ol.back.Entity.User;
 import com.min5ol.back.Repository.UserRepository;
-import com.min5ol.back.DTO.SignUpRequest;
+import com.min5ol.back.exception.*;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +20,10 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // ✅ ID로 사용자 정보 조회
-    public UserResponse getUserById(Long id) {
-        User user = userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-        return new UserResponse(user.getId(), user.getUsername(), user.getNickname(), user.getEmail(), user.getProfileImg());
-    }
-
-    // ✅ 회원가입 기능
+    // ✅ 회원가입 기능 (중복 이메일 검사는 컨트롤러에서 이미 수행함)
     public String signUp(SignUpRequest signUpRequest) {
-        if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
-            return "Email is already registered.";
-        }
         String encodedPassword = passwordEncoder.encode(signUpRequest.getPassword());
+
         User user = User.builder()
                 .username(signUpRequest.getUsername())
                 .password(encodedPassword)
@@ -39,12 +32,72 @@ public class UserService {
                 .role(User.Role.USER)
                 .profileImg("https://res.cloudinary.com/dxavift7v/image/upload/v1742824631/profile-basic_k3dxhf.jpg")
                 .build();
+
         userRepository.save(user);
         return "User registered successfully";
+    }
+
+    // ✅ 이메일 중복 검사
+    public boolean isEmailDuplicate(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     // ✅ 닉네임 중복 검사
     public boolean isNicknameDuplicate(String nickname) {
         return userRepository.existsByNickname(nickname);
+    }
+
+    // ✅ 사용자 조회
+    public UserResponse getUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getProfileImg()
+        );
+    }
+
+    // ✅ 아이디 유효성 검사
+    public void validateUsername(String username) {
+        if (username == null || username.trim().isEmpty()) {
+            throw new SignupUsernameNotProvidedException();
+        }
+        if (!username.matches("^[a-z0-9_-]{4,16}$")) {
+            throw new InvalidSignupUsernameException();
+        }
+        if (userRepository.existsByUsername(username)) {
+            throw new DuplicateUsernameException();
+        }
+    }
+
+    // ✅ 비밀번호 유효성 검사
+    public void validatePassword(String password, String confirmPassword) {
+        if (password == null || password.trim().isEmpty()) {
+            throw new PasswordNotProvidedException();
+        }
+
+        if (password.length() < 8 ||
+                !password.matches(".*[a-zA-Z].*") ||
+                !password.matches(".*[0-9!@#$%^&*].*")) {
+            throw new InvalidPasswordException("비밀번호는 문자 1개, 숫자/특수문자 1개 이상 포함, 8자 이상이어야 합니다.");
+        }
+
+        if (!password.equals(confirmPassword)) {
+            throw new PasswordMismatchException();
+        }
+    }
+
+    // ✅ 닉네임 유효성 검사
+    public void validateNickname(String nickname) {
+        if (nickname == null || nickname.trim().isEmpty()) {
+            throw new MissingNicknameException();
+        }
+        if (userRepository.existsByNickname(nickname)) {
+            throw new DuplicateNicknameException();
+        }
     }
 }

@@ -65,7 +65,14 @@ public class SecurityConfig {
                     "/auth/**",
                     "/login",
                     "/signup",
-                    "/api/users/check-nickname"
+                    "/signup/step1",
+                    "/api/signup/step1",
+                    "/signup/step2",
+                    "/api/signup/step2",
+                    "/signup/step3",
+                    "/api/signup/step3",
+                    "/signup/step4",
+                    "/api/signup/step4"
                 ).permitAll()
                 .anyRequest().authenticated())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

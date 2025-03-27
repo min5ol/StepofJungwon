@@ -1,5 +1,7 @@
+// src/pages/Login.jsx
 import { useState } from 'react';
-import axios from 'axios'; // axios 추가
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import brandLogo from '../assets/YANGFLIX.png';
 import InputField from "../components/InputField";
 import Rounded from "../components/RoundedButton";
@@ -8,6 +10,8 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [autoLogin, setAutoLogin] = useState(false); // ✅ 자동 로그인 체크 여부
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,28 +30,24 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/api/login', // 👉 백엔드 로그인 엔드포인트
-        {
-          username,
-          password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        'http://localhost:8080/api/login',
+        { username, password },
+        { headers: { 'Content-Type': 'application/json' } }
       );
 
-      // 로그인 성공 시 처리 (예: 토큰 저장)
       const token = response.data.token;
-      localStorage.setItem('token', token);
+
+      // ✅ 자동 로그인 여부에 따라 저장소 선택
+      if (autoLogin) {
+        localStorage.setItem('token', token);
+      } else {
+        sessionStorage.setItem('token', token);
+      }
+
       console.log('로그인 성공:', token);
-
-      // 원하는 페이지로 이동
-      window.location.href = '/main';
-
+      navigate("/year");
     } catch (err) {
-      if (err.response && err.response.status === 401) {
+      if (err.response?.status === 401) {
         setError('아이디 또는 비밀번호를 잘못 입력하셨습니다.');
       } else {
         setError('일시적인 오류로 로그인 할 수 없습니다. 잠시 후 다시 이용해주세요.');
@@ -78,6 +78,18 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+
+        {/* ✅ 자동 로그인 체크박스 */}
+        <div className="w-full px-[11.63vw] pt-[3vw] text-white text-[2.79vw] font-AppleSDGothicNeoL">
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              checked={autoLogin}
+              onChange={() => setAutoLogin(!autoLogin)}
+            />
+            <span>자동 로그인</span>
+          </label>
         </div>
 
         {error && (

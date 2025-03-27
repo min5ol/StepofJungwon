@@ -1,26 +1,52 @@
 // src/pages/SignupStep4.jsx
 import { useState } from "react";
+import axios from "axios";
 import InputField from "../components/InputField";
 import Rounded from "../components/RoundedButton";
 import brandLogo from "../assets/YANGFLIX.png";
 import step3 from "../assets/step3.png";
 import arrowRight from "../assets/arrow-right.png";
 import AgreementModal from "../components/AgreementModal";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupStep4() {
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email) {
+      setError("이메일을 입력해주세요.");
+      return;
+    }
+
     if (!agree) {
       setError("약관에 동의해야 가입할 수 있습니다.");
       return;
     }
-    // TODO: 이메일 유효성 검사 + 제출 로직
-    console.log("회원가입 완료:", email);
+
+    try {
+      const signupData = JSON.parse(localStorage.getItem("signupData"));
+
+      const response = await axios.post("http://localhost:8080/api/signup/step4", {
+        ...signupData,
+        email,
+      });
+
+      // 성공 시 localStorage 정리 후 이동
+      localStorage.removeItem("signupData");
+      navigate("/signup/complete");
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("서버 오류로 가입할 수 없습니다. 잠시 후 다시 시도해주세요.");
+      }
+    }
   };
 
   return (
@@ -41,12 +67,11 @@ export default function SignupStep4() {
       <form onSubmit={handleSubmit} className="w-full flex flex-col items-center pt-[6.98vw]">
         <InputField
           label="이메일"
-          placeholder="example@email.com"
+          placeholder="아이디 및 비밀번호 찾기 시 사용되니 실제 이메일을 작성해주세요."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        {/* 약관 체크박스 */}
         <div className="w-full px-[11.63vw] pt-[4.65vw] text-[2.79vw] font-AppleSDGothicNeoR">
           <label className="flex items-start space-x-[2.33vw]">
             <input
