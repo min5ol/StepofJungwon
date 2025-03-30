@@ -7,7 +7,7 @@ export default function Year() {
   const navigate = useNavigate();
 
   const handleYearClick = (year) => {
-    navigate(`/contents/${year}`); // 연도별 콘텐츠 페이지로 이동
+    navigate(`/${year}`); // 연도별 콘텐츠 페이지로 이동
   };
 
   return (

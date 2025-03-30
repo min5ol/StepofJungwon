@@ -66,7 +66,7 @@ export default function Login() {
         Yangflix에 로그인 하기
       </p>
 
-      <form onSubmit={handleLogin} className="w-full flex flex-col items-center">
+      <form onSubmit={handleLogin} className="flex flex-col items-center">
         <InputField
           label="아이디"
           placeholder="아이디"
@@ -85,7 +85,7 @@ export default function Login() {
         </div>
 
         {/* 자동 로그인 체크박스 */}
-        <div className="w-full px-[11.63vw] pt-[3vw] text-white text-[2.79vw] font-AppleSDGothicNeoL">
+        <div className="w-full pt-[3vw] text-white text-[2.79vw] font-AppleSDGothicNeoL">
           <label className="flex items-center space-x-2">
             <input
               type="checkbox"
