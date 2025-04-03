@@ -50,6 +50,14 @@ const GENRE_GROUPS = [
   },
 ];
 
+// ✅ Cloudinary WebP 변환 함수
+const toWebp = (url) => {
+  if (url.includes("res.cloudinary.com") && !url.includes(".webp")) {
+    return url.replace("/upload/", "/upload/f_webp/");
+  }
+  return url;
+};
+
 export default function YearPage2025() {
   const [contents, setContents] = useState([]);
 
@@ -73,8 +81,7 @@ export default function YearPage2025() {
   };
 
   return (
-    <div className="bg-black text-white font-AppleSDGothicNeoR px-4 mb-20">
-      {/* 유저 정보 + 아이콘 */}
+    <div className="bg-black text-white font-AppleSDGothicNeoR px-4">
       <div className="flex justify-between items-center mt-[4vw]">
         <h1 className="text-[5vw] font-bold">양정원 님</h1>
         <div className="flex gap-[4vw]">
@@ -87,7 +94,6 @@ export default function YearPage2025() {
         </div>
       </div>
 
-      {/* 🔗 소셜 버튼 */}
       <div className="flex flex-wrap gap-[2.33vw] mt-[4vw]">
         {[
           { label: "위버스", url: "https://weverse.io/enhypen/" },
@@ -107,7 +113,6 @@ export default function YearPage2025() {
         ))}
       </div>
 
-      {/* 🎬 상단 영상 */}
       <div className="pt-6 flex justify-center">
         <video
           src={main2025}
@@ -119,12 +124,13 @@ export default function YearPage2025() {
         />
       </div>
 
-      {/* 🏆 TOP 5 슬라이더 */}
-      <Top5Slider items={contents.slice(0, 5)} />
+      <Top5Slider items={contents.slice(0, 5).map((c) => ({ ...c, thumbnailUrl: toWebp(c.thumbnailUrl) }))} />
 
-      {/* 🎬 장르별 콘텐츠 */}
       {GENRE_GROUPS.map((group) => {
-        const filtered = contents.filter((c) => group.types.includes(c.title));
+        const filtered = contents
+          .filter((c) => group.types.includes(c.title))
+          .map((c) => ({ ...c, thumbnailUrl: toWebp(c.thumbnailUrl) }));
+
         if (filtered.length === 0) return null;
 
         return (
@@ -158,11 +164,16 @@ export default function YearPage2025() {
         );
       })}
 
-      {/* ⛳ 푸터 */}
       <footer className="mt-[2.33vw] pt-[2.33vw] pb-[2.33vw] border-t border-white/10 flex justify-around items-center">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}><img src={home} className="h-[8.84vw]"/></button>{" "}
-        <a href="https://twitter.com/kkulbbanxx" target="_blank" rel="noreferrer"><img src={kkulbbanxx} className="h-[8.84vw]" /></a>{" "}
-        <a href="/year"><img src={year} className="h-[8.84vw]" /></a>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <img src={home} className="h-[8.84vw]" />
+        </button>
+        <a href="https://twitter.com/kkulbbanxx" target="_blank" rel="noreferrer">
+          <img src={kkulbbanxx} className="h-[8.84vw]" />
+        </a>
+        <a href="/year">
+          <img src={year} className="h-[8.84vw]" />
+        </a>
       </footer>
     </div>
   );

@@ -16,6 +16,8 @@ import YearPage2023 from "./pages/YearPage2023";
 import YearPage2022 from "./pages/YearPage2022";
 import YearPage2021 from "./pages/YearPage2021";
 import YearPage2020 from "./pages/YearPage2020";
+import SearchPage from "./pages/SearchPage";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="/2022" element={<YearPage2022 />} />
           <Route path="/2021" element={<YearPage2021 />} />
           <Route path="/2020" element={<YearPage2020 />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Routes>
       </Router>
     </div>

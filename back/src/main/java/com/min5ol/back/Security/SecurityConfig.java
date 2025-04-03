@@ -36,18 +36,17 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        builder.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         return builder.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173")); // Vite dev 서버
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true); // 쿠키/헤더 포함 허용
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
@@ -61,31 +60,18 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers(
-                                "/auth/**",
-                                "/login",
                                 "/api/login",
-                                "/signup",
-                                "/signup/step1",
-                                "/api/signup/step1",
-                                "/signup/step2",
-                                "/api/signup/step2",
-                                "/signup/step3",
-                                "/api/signup/step3",
-                                "/signup/step4",
-                                "/api/signup/step4",
-                                "/admin",
-                                "/api/admin",
-                                "/admin/content",
-                                "/api/admin/content",
-                                "/admin/episode",
-                                "/api/admin/episode",
-                                "/content",
-                                "/api/content",
-                                "/episodes",
-                                "/api/episodes"
-                                )
-                        .permitAll()
-                        .anyRequest().authenticated())
+                                "/api/signup/**",
+                                "/year",
+                                "/content/**",
+                                "/api/content/**",
+                                "/episodes/**",
+                                "/api/episodes/**",
+                                "/search",
+                                "/mypage"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

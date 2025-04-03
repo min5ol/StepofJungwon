@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { convertToWebp } from "../utils/imageUtils";
 
 export default function ContentDetailSquare() {
   const { id } = useParams(); // 콘텐츠 ID
@@ -43,8 +44,14 @@ export default function ContentDetailSquare() {
     <div className="bg-black text-white font-AppleSDGothicNeoR">
       {/* 고정 썸네일 */}
       <div className="sticky top-0 bg-black z-10">
-        <img src={content.thumbnailUrl} alt={content.title} className="w-full aspect-square object-cover" />
-        <button onClick={handleClose} className="absolute top-[4vw] right-[4vw] text-white text-[6vw]">X</button>
+        <img
+          src={convertToWebp(content.thumbnailUrl)}
+          alt={content.title}
+          className="w-full aspect-square object-cover"
+        />
+        <button onClick={handleClose} className="absolute top-[4vw] right-[4vw] text-white text-[6vw]">
+          X
+        </button>
       </div>
 
       {/* 콘텐츠 정보 */}
@@ -57,7 +64,12 @@ export default function ContentDetailSquare() {
         </div>
 
         {/* 재생 버튼 */}
-        <button onClick={handlePlay} className="mt-[3vw] w-full bg-white text-black py-[2vw] rounded-md text-[4vw] font-bold">▶ 재생</button>
+        <button
+          onClick={handlePlay}
+          className="mt-[3vw] w-full bg-white text-black py-[2vw] rounded-md text-[4vw] font-bold"
+        >
+          ▶ 재생
+        </button>
 
         {/* 설명 */}
         <p className="mt-[4vw] text-[3.7vw] leading-[5vw] whitespace-pre-line">{content.description}</p>
@@ -79,7 +91,7 @@ export default function ContentDetailSquare() {
         {episodes.map((ep, idx) => (
           <div key={ep.id} className="mb-[4vw]">
             <img
-              src={ep.thumbnailUrl}
+              src={convertToWebp(ep.thumbnailUrl)}
               alt={ep.title}
               className="w-full rounded-md mb-[1vw]"
               onClick={() => window.open(ep.url, "_blank")}

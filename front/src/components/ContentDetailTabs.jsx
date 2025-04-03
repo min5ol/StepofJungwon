@@ -1,8 +1,9 @@
-// ContentDetailTabs.jsx
+// src/components/ContentDetailTabs.jsx
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import copy from "copy-to-clipboard";
+import { convertToWebp } from "../utils/imageUtils";
 
 export default function ContentDetailTabs({ content, episodes, similarContents }) {
   const [activeTab, setActiveTab] = useState("episodes");
@@ -23,7 +24,11 @@ export default function ContentDetailTabs({ content, episodes, similarContents }
     <div className="bg-black text-white font-AppleSDGothicNeoR pb-20">
       {/* 상단 썸네일 */}
       <div className="sticky top-0 z-50 bg-black pb-4">
-        <img src={content.thumbnailUrl} alt={content.title} className="w-full aspect-video object-cover" />
+        <img
+          src={convertToWebp(content.thumbnailUrl)}
+          alt={content.title}
+          className="w-full aspect-video object-cover"
+        />
         <div className="flex justify-between items-center px-4 mt-2">
           <button onClick={() => navigate(`/year/${content.year}`)} className="text-white text-lg">✕</button>
           <div className="flex gap-3">
@@ -63,7 +68,11 @@ export default function ContentDetailTabs({ content, episodes, similarContents }
         {activeTab === "episodes" ? (
           episodes.map((ep) => (
             <div key={ep.id} className="flex items-center gap-4">
-              <img src={ep.thumbnailUrl} alt={ep.title} className="w-[40vw] rounded-md" />
+              <img
+                src={convertToWebp(ep.thumbnailUrl)}
+                alt={ep.title}
+                className="w-[40vw] rounded-md"
+              />
               <div className="flex-1">
                 <p className="text-lg">{ep.title}</p>
                 <button
@@ -79,7 +88,11 @@ export default function ContentDetailTabs({ content, episodes, similarContents }
         ) : (
           similarContents.map((item) => (
             <div key={item.id} className="flex items-center gap-4">
-              <img src={item.thumbnailUrl} alt={item.title} className="w-[40vw] rounded-md" />
+              <img
+                src={convertToWebp(item.thumbnailUrl)}
+                alt={item.title}
+                className="w-[40vw] rounded-md"
+              />
               <div>
                 <p>{item.title}</p>
               </div>

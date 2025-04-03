@@ -2,6 +2,7 @@ package com.min5ol.back.DTO;
 
 import com.min5ol.back.Entity.Episode;
 import lombok.Getter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -13,6 +14,7 @@ public class EpisodeResponse {
     private int episodeNumber;
     private LocalDate releaseDate;
     private String thumbnailUrl;
+    private String videoUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -23,8 +25,8 @@ public class EpisodeResponse {
         this.episodeNumber = episode.getEpisodeNumber();
         this.releaseDate = episode.getReleaseDate();
         this.thumbnailUrl = episode.getThumbnail();
-        // createdAt, updatedAt 포함 시:
-        // this.createdAt = episode.getCreatedAt();
-        // this.updatedAt = episode.getUpdatedAt();
+        this.videoUrl = episode.getVideoUrl();
+        this.createdAt = episode.getCreatedAt();
+        this.updatedAt = episode.getUpdatedAt();
     }
 }

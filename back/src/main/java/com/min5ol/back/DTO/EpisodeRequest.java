@@ -3,6 +3,7 @@ package com.min5ol.back.DTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDate;
 
 @Getter
@@ -13,5 +14,6 @@ public class EpisodeRequest {
     private int episodeNumber;
     private LocalDate releaseDate;
     private String thumbnailUrl;
+    private String videoUrl;
     private Long contentId;
 }

@@ -22,7 +22,6 @@ public class EpisodeService {
         this.contentRepository = contentRepository;
     }
 
-    // 에피소드 추가 (관리자용)
     public EpisodeResponse addEpisode(EpisodeRequest request) {
         Content content = contentRepository.findById(request.getContentId())
                 .orElseThrow(() -> new RuntimeException("해당 컨텐츠가 존재하지 않습니다."));
@@ -32,12 +31,11 @@ public class EpisodeService {
                 .episodeNumber(request.getEpisodeNumber())
                 .releaseDate(request.getReleaseDate())
                 .thumbnail(request.getThumbnailUrl())
+                .videoUrl(request.getVideoUrl())
                 .build();
-        Episode savedEpisode = episodeRepository.save(episode);
-        return new EpisodeResponse(savedEpisode);
+        return new EpisodeResponse(episodeRepository.save(episode));
     }
 
-    // 에피소드 수정 (관리자용)
     public EpisodeResponse updateEpisode(Long id, EpisodeRequest updatedDto) {
         Episode episode = episodeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 에피소드가 존재하지 않습니다."));
@@ -45,25 +43,22 @@ public class EpisodeService {
         episode.setEpisodeNumber(updatedDto.getEpisodeNumber());
         episode.setReleaseDate(updatedDto.getReleaseDate());
         episode.setThumbnail(updatedDto.getThumbnailUrl());
-        Episode updatedEpisode = episodeRepository.save(episode);
-        return new EpisodeResponse(updatedEpisode);
+        episode.setVideoUrl(updatedDto.getVideoUrl());
+        return new EpisodeResponse(episodeRepository.save(episode));
     }
 
-    // 에피소드 삭제 (관리자용)
     public void deleteEpisode(Long id) {
         Episode episode = episodeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 에피소드가 존재하지 않습니다."));
         episodeRepository.delete(episode);
     }
 
-    // 특정 컨텐츠의 에피소드 전체 조회
     public List<EpisodeResponse> getEpisodesByContentId(Long contentId) {
         return episodeRepository.findByContent_Id(contentId).stream()
                 .map(EpisodeResponse::new)
                 .collect(Collectors.toList());
     }
 
-    // 특정 에피소드 조회
     public EpisodeResponse getEpisodeById(Long id) {
         Episode episode = episodeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 에피소드가 존재하지 않습니다."));

@@ -3,20 +3,26 @@ package com.min5ol.back.Service;
 import com.min5ol.back.DTO.ContentRequest;
 import com.min5ol.back.DTO.ContentResponse;
 import com.min5ol.back.Entity.Content;
+import com.min5ol.back.Entity.Episode;
 import com.min5ol.back.Repository.ContentRepository;
+import com.min5ol.back.Repository.EpisodeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class ContentService {
 
     private final ContentRepository contentRepository;
+    private final EpisodeRepository episodeRepository;
 
-    public ContentService(ContentRepository contentRepository) {
+    public ContentService(ContentRepository contentRepository, EpisodeRepository episodeRepository) {
         this.contentRepository = contentRepository;
+        this.episodeRepository = episodeRepository;
     }
 
     // 컨텐츠 추가 (관리자용)
@@ -64,4 +70,19 @@ public class ContentService {
                 .orElseThrow(() -> new RuntimeException("해당 컨텐츠가 존재하지 않습니다."));
         return new ContentResponse(content);
     }
+
+    public List<ContentResponse> searchContents(String keyword) {
+        List<Content> contentMatches = contentRepository.findByTitleContainingIgnoreCase(keyword);
+        List<Episode> episodeMatches = episodeRepository.findByTitleContainingIgnoreCase(keyword);
+
+        Set<Content> allMatches = new HashSet<>(contentMatches);
+        for (Episode episode : episodeMatches) {
+            allMatches.add(episode.getContent());
+        }
+
+        return allMatches.stream()
+                .map(ContentResponse::new)
+                .collect(Collectors.toList());
+    }
+
 }

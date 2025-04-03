@@ -10,4 +10,5 @@ import java.util.List;
 public interface ContentRepository extends JpaRepository<Content, Long> {
     List<Content> findByTitleContaining(String keyword);
     List<Content> findByGenre(String genre);
+    List<Content> findByTitleContainingIgnoreCase(String keyword);
 }

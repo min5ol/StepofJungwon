@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import InputField from "./InputField";
 import ImageUploader from "./ImageUploader";
+import convertToWebp from "../utils/convertToWebp";
 
 export default function ContentForm() {
   const [title, setTitle] = useState("");
@@ -42,6 +43,15 @@ export default function ContentForm() {
       <InputField label="장르" value={genre} onChange={(e) => setGenre(e.target.value)} />
 
       <ImageUploader url={thumbnailUrl} setUrl={setThumbnailUrl} />
+
+      {/* WebP 프리뷰 (별도 보강용) */}
+      {thumbnailUrl && (
+        <img
+          src={convertToWebp(thumbnailUrl)}
+          alt="미리보기"
+          className="mt-[4vw] w-[60vw] max-w-[200px] rounded-lg border border-gray-500"
+        />
+      )}
 
       <input
         type="submit"

@@ -24,8 +24,7 @@ public class EpisodeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EpisodeResponse> updateEpisode(
-            @PathVariable Long id, @RequestBody EpisodeRequest updatedDto) {
+    public ResponseEntity<EpisodeResponse> updateEpisode(@PathVariable Long id, @RequestBody EpisodeRequest updatedDto) {
         return ResponseEntity.ok(episodeService.updateEpisode(id, updatedDto));
     }
 

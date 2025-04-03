@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import axios from "axios";
+import convertToWebp from "../utils/convertToWebp";
 
 export default function ImageUploader({ url, setUrl }) {
   const fileInputRef = useRef(null);
@@ -17,7 +18,8 @@ export default function ImageUploader({ url, setUrl }) {
         "https://api.cloudinary.com/v1_1/dxavift7v/image/upload",
         formData
       );
-      setUrl(res.data.secure_url);
+      const uploadedUrl = res.data.secure_url;
+      setUrl(uploadedUrl);
     } catch (err) {
       alert("이미지 업로드 실패!");
     }
@@ -29,16 +31,15 @@ export default function ImageUploader({ url, setUrl }) {
 
   return (
     <div className="w-full flex flex-col items-center space-y-[4vw] mt-[6vw]">
-      {/* 썸네일 미리보기 (위쪽에 위치) */}
+      {/* 썸네일 미리보기 (WebP 변환된 프리뷰) */}
       {url && (
         <img
-          src={url}
+          src={convertToWebp(url)}
           alt="썸네일 미리보기"
           className="w-[60vw] max-w-[200px] rounded-[3vw] mb-[3vw] border border-gray-700"
         />
       )}
 
-      {/* 숨겨진 파일 input */}
       <input
         type="file"
         ref={fileInputRef}
@@ -46,7 +47,6 @@ export default function ImageUploader({ url, setUrl }) {
         onChange={handleFileChange}
       />
 
-      {/* 업로드 버튼 */}
       <button
         type="button"
         onClick={triggerFileSelect}

@@ -31,16 +31,16 @@ public class BackApplication {
         return args -> {
             String adminEmail = "sol0508@kakao.com";
             String adminUsername = "kkulbbannxx";
-            String adminPassword = "wkdalsthf1!"; // 원하는 비밀번호
-
+            String adminPassword = "wkdalsthf1!";
+    
             if (!userRepository.existsByEmail(adminEmail)) {
                 User admin = User.builder()
                         .username(adminUsername)
-                        .password(passwordEncoder.encode(adminPassword)) // 비밀번호 암호화
+                        .password(passwordEncoder.encode(adminPassword))
                         .email(adminEmail)
                         .nickname("꿀빵이")
                         .role(User.Role.ADMIN)
-                        .profileImg("https://res.cloudinary.com/dxavift7v/image/upload/v1742824631/profile-basic_k3dxhf.jpg") // ✅ 기본 이미지
+                        .profileImage("https://res.cloudinary.com/dxavift7v/image/upload/v1742824631/profile-basic_k3dxhf.jpg")
                         .build();
                 userRepository.save(admin);
                 System.out.println("✅ 관리자 계정 생성 완료");
@@ -49,4 +49,5 @@ public class BackApplication {
             }
         };
     }
+    
 }

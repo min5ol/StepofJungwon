@@ -4,6 +4,7 @@ import top2 from "../assets/top2.png";
 import top3 from "../assets/top3.png";
 import top4 from "../assets/top4.png";
 import top5 from "../assets/top5.png";
+import { convertToWebp } from "../utils/imageUtils";
 
 const TOP_IMAGES = [top1, top2, top3, top4, top5];
 
@@ -21,13 +22,13 @@ export default function Top5Slider({ items }) {
       <Slider {...sliderSettings} className="mt-[2.33vw]">
         {items.map((item, idx) => (
           <div key={item.id} className="px-1 relative">
-            {/* 썸네일 이미지 */}
+            {/* 썸네일 이미지 (WebP 변환 적용) */}
             <img
-              src={item.thumbnailUrl}
+              src={convertToWebp(item.thumbnailUrl)}
               alt={item.title}
               className="w-full max-w-[27.91vw] relative z-10"
             />
-            {/* 숫자 이미지 (뒤에 배치) */}
+            {/* 숫자 이미지 (순위 배경) */}
             <img
               src={TOP_IMAGES[idx]}
               alt={`top${idx + 1}`}
@@ -39,4 +40,3 @@ export default function Top5Slider({ items }) {
     </div>
   );
 }
-

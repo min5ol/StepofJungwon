@@ -1,7 +1,7 @@
-// components/ContentDetailWide.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { convertToWebp } from "../utils/imageUtils";
 
 export default function ContentDetailWide() {
   const { id } = useParams(); // /cover/:id
@@ -39,7 +39,7 @@ export default function ContentDetailWide() {
     <div className="bg-black text-white font-AppleSDGothicNeoR min-h-[100dvh] pb-[10vw]">
       {/* 📌 상단 고정 썸네일 */}
       <div className="sticky top-0 z-20 bg-black flex flex-col items-center">
-        <img src={content.thumbnailUrl} className="w-full max-w-[90vw] rounded-b-xl" />
+        <img src={convertToWebp(content.thumbnailUrl)} className="w-full max-w-[90vw] rounded-b-xl" />
         <div className="flex justify-between w-full max-w-[90vw] px-[4vw] pt-[2vw]">
           <button onClick={handleClose}>❌ 닫기</button>
           <div className="flex gap-[3vw]">
@@ -62,7 +62,7 @@ export default function ContentDetailWide() {
           <div key={ep.id} className="relative">
             <a href={ep.videoUrl} target="_blank" rel="noreferrer">
               <img
-                src={ep.thumbnailUrl}
+                src={convertToWebp(ep.thumbnailUrl)}
                 className="rounded-lg w-full aspect-video object-cover"
               />
             </a>

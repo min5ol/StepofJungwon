@@ -44,4 +44,10 @@ public class ContentController {
     public ResponseEntity<ContentResponse> getContentById(@PathVariable Long id) {
         return ResponseEntity.ok(contentService.getContentById(id));
     }
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<ContentResponse>> searchContents(@RequestParam String keyword) {
+        return ResponseEntity.ok(contentService.searchContents(keyword));
+    }
+    
 }
